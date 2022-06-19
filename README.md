@@ -1,5 +1,4 @@
 <h2>About LibraryApi</h2>
-____________________________________________________________________________________________________________________________
 
 
 Allows the creation of books anonymously. Developed with Node.js. MongoDB was used as the database. You can run the project in docker.
@@ -7,7 +6,7 @@ Allows the creation of books anonymously. Developed with Node.js. MongoDB was us
 ____________________________________________________________________________________________________________________________
 
 <h2>HTTP Methods</h2>
-____________________________________________________________________________________________________________________________
+
 
 The application will be available on <a href="http://localhost:3000/">localhost:3000</a><br>
 
