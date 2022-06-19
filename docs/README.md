@@ -3,10 +3,11 @@ navigate to root of the project and run commands listed below
     <li>docker compose build 
     <li>docker compose up
 
-application will be available on localhost:3000
+The application will be available on localhost:3000
 
 
-You can test the app following endpoints 
+#You can test the app following endpoints 
+<a href="https://github.com/kildisismail/LibraryApi/blob/master/docs/LibraryApi.postman_collection.json">Get Postman api docs</a>
 <li><b>Get all books</b>
     GET http://localhost:3000/book 
 <li><b>Create Book</b>
