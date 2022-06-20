@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 chai.use(chaiHttp);
-const app = require("../../server");
+const app = require("../../app");
 const server = `http://localhost:${port}`;
 
 describe("Book GetAll", () => {
