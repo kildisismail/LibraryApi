@@ -5,7 +5,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ~/apps/mongo:/data/db   
+      - ./volumes/mongo:/data/db   
   web:
     build:
       context: ./
