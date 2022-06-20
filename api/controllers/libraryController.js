@@ -2,64 +2,127 @@
 
 var mongoose = require('mongoose'),
   Book = mongoose.model('Book');
+// import * as libraryService from '../services/libraryService';
+const libraryService = require('../services/libraryService');
 
-try {
-  exports.get_all_books = function (req, res) {
-    Book.find({}, function (err, task) {
-      if (err)
-        res.send(err);
-        res.json(task);
+exports.get_all_books = async (req, res) => {
+  try {
+    const result = await libraryService.getAllBook();
+    res.json({
+      result: true,
+      data: result,
+      time: new Date()
     });
-  };
-} catch (error) {
-  throw new Error("An unexpected error occurred. Error message: " + error.message);
-}
-
-try {
-  exports.create_book = function (req, res) {
-    var new_book = new Book(req.body);
-    new_book.save(function (err, book) {
-      if (err)
-        res.send(err);
-        res.json(book);
+  } catch (error) {
+    res.json({
+      result: false,
+      data: null,
+      message: error.message,
+      time: new Date()
     });
-  };
-} catch (error) {
-  throw new Error("An unexpected error occurred. Error message: " + error.message);
-}
+  }
+};
 
 
-try {
-  exports.get_book = function (req, res) {
+exports.create_book = async (req, res) => {
+  try {
+    const result = await libraryService.createBook(req);
+    return res.json({
+      result: true,
+      data: result,
+      time: new Date()
+    });
+
+  } catch (error) {
+    res.json({
+      result: false,
+      data: null,
+      message: error.message,
+      time: new Date()
+    });
+  }
+};
+
+
+// exports.get_book = async (req, res) => {
+//   try {
+//     const result = await libraryService.getBook(req);
+//     return res.json({
+//       result: true,
+//       data: result,
+//       time: new Date()
+//     });
+//   } catch (error) {
+//     res.json({
+//       result: false,
+//       data: null,
+//       message: error.message,
+//       time: new Date()
+//     });
+//   }
+// };
+
+exports.get_book = function (req, res) {
+  try {
     Book.findById(req.params.bookId, function (err, book) {
       if (err)
         res.send(err);
-        res.json(book);
+      return res.json({
+        result: true,
+        data: book,
+        time: new Date()
+      });
     });
-  };
-} catch (error) {
-  throw new Error("An unexpected error occurred. Error message: " + error.message);
-}
+  } catch (error) {
+    res.json({
+      result: false,
+      data: null,
+      message: error.message,
+      time: new Date()
+    });
+  }
+};
 
-try {
-  exports.update_book = function (req, res) {
+exports.update_book = function (req, res) {
+  try {
     Book.findOneAndUpdate({ _id: req.params.bookId }, req.body, { new: true }, function (err, book) {
       if (err)
         res.send(err);
-        res.json(book);
+        return res.json({
+          result: true,
+          data: book,
+          time: new Date()
+        });
+      });
+  } catch (error) {
+    res.json({
+      result: false,
+      data: null,
+      message: error.message,
+      time: new Date()
     });
-  };
-} catch (error) {
-  throw new Error("An unexpected error occurred. Error message: " + error.message);
-}
-
+  }
+};
 
 exports.delete_book = function (req, res) {
-  Book.remove({
-    _id: req.params.bookId
-  }, function (err, book) {
-    if (err)
-      res.send(err);
-      res.json({ message: 'book deleted' });
-  });
+  try {
+    Book.remove({
+      _id: req.params.bookId
+    }, function (err, book) {
+      if (err)
+        res.send(err);
+        return res.json({
+          result: true,
+          message: 'book deleted',
+          time: new Date()
+        });
+    });
+  } catch (error) {
+    res.json({
+      result: false,
+      data: null,
+      message: error.message,
+      time: new Date()
+    });
+  }
 };
